@@ -17,8 +17,9 @@ params ={"serviceKey" : security.key(),
          }
 
 run("clear")
+print("Let's Go!")
 while True:
-    sleep(60)
+    sleep(120)
     try:
         try:
             dataAll = get(url, params=params, timeout=30).json()["DisasterMsg"][1]["row"][::-1]
@@ -33,7 +34,7 @@ while True:
                 embed.url = security.url()
                 embed.description = data["location_name"]
                 embed.add_field(name="", value=">>> ```{}```".format(data["msg"]))
-                embed.set_footer(text="{} • {}".format(data["send_platform"], dt), icon_url=security.icon())
+                embed.set_footer(text="{} • {}".format(data["send_platform"], data["create_date"]), icon_url=security.icon())
                 webhook.send(embed=embed)
                 embed.clear_fields()
 
