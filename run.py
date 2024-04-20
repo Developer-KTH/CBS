@@ -29,7 +29,7 @@ while True:
         for data in dataAll:
             dt = timezone("Asia/Seoul").localize(datetime.strptime(str(data["create_date"]), "%Y/%m/%d %H:%M:%S"))
 
-            if dt >= datetime.now(timezone("Asia/Seoul")) - timedelta(minutes=2):
+            if dt >= (datetime.now(timezone("Asia/Seoul")) - timedelta(minutes=2)).replace(second=0):
                 embed.title = "재난안전 상황정보 #{}".format(data["md101_sn"])
                 embed.url = security.url()
                 embed.description = data["location_name"]
