@@ -35,7 +35,7 @@ while True:
                 webhook.send(embed=embed)
                 embed.clear_fields()
 
-            nowNumber = int(data["md101_sn"])
+                nowNumber = int(data["md101_sn"])
 
     except:
         continue
