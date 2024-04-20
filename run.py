@@ -19,17 +19,17 @@ params ={"serviceKey" : security.key(),
 run("clear")
 print("Let's Go!")
 while True:
-    sleep(120)
+    sleep(60)
     try:
         try:
-            dataAll = get(url, params=params, timeout=30).json()["DisasterMsg"][1]["row"][::-1]
+            dataAll = get(url, params=params, timeout=30).json()["DisasterMsg"][1]["row"]
         except exceptions.Timeout:
             continue
 
-        for data in dataAll:
+        for data in dataAll[::-1]:
             dt = timezone("Asia/Seoul").localize(datetime.strptime(str(data["create_date"]), "%Y/%m/%d %H:%M:%S"))
 
-            if dt >= (datetime.now(timezone("Asia/Seoul")) - timedelta(minutes=2)).replace(second=0):
+            if dt >= (datetime.now(timezone("Asia/Seoul")) - timedelta(minutes=1)).replace(second=0):
                 embed.title = "재난안전 상황정보 #{}".format(data["md101_sn"])
                 embed.url = security.url()
                 embed.description = data["location_name"]
